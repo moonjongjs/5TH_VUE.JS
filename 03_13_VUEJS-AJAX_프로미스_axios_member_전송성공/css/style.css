@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+#wrap {width:100%;}
+#wrap #app {width:100%;}
+#wrap #app h1 {text-align:center;color:#000;padding:50px 0;}
+#wrap #app .member {width:800px;margin:0 auto;}
+#wrap #app .member th ,
+#wrap #app .member td {border:1px solid #ccc;height:48px;text-align:center;}
+#wrap #app .button-wrap {padding-top:60px;text-align:center;}
+#wrap #app .button-wrap button {background:#000;color:#fff;font-size:17px;padding:10px 30px;cursor:pointer;transition:all .3s;}
+#wrap #app .button-wrap button:hover {background:#333;}
+#wrap #app .button-wrap button:active {background:#733;}
+
+
+
+/* 폼 데이터 전송 페이지 */
+#formWrap {}
+#formWrap #app {width:800px;margin:0 auto;}
+#formWrap #app h1 {text-align:center;padding-top:100px;}
+#formWrap #app form {padding:50px;}
+#formWrap #app form .form-box {}
+#formWrap #app form .form-box ul {}
+#formWrap #app form .form-box ul li {}
+#formWrap #app form .form-box ul li div {padding:5px 0;}
+#formWrap #app form .form-box ul li div label {display:inline-block;width:100px;font-size:17px;color:#555;}
+#formWrap #app form .form-box ul li div input[type='text'],   
+#formWrap #app form .form-box ul li div input[type='password'] {padding:5px 10px;width:550px;height:45px;border:1px solid #ccc;}
+#formWrap #app                .button-box {text-align:center;padding-top:50px;}
+#formWrap #app                .button-box input[type='button'] {width:300px;height:48px;background:#000;color:#fff;cursor:pointer;}
+#formWrap #app                .button-box input[type='button']:hover {background:#222;}
+#formWrap #app                .button-box input[type='submit'] {width:300px;height:48px;background:#000;color:#fff;cursor:pointer;}
+#formWrap #app                .button-box input[type='submit']:hover {background:#222;}

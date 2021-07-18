@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콤퍼넌트_전역콤퍼넌트_템플릿</title>
+
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+
+    <!-- 오픈소스  -->
+    <script src="./js/lib/jquery.min.js"></script>    
+    <script src="./vue/lib/vue.js"></script>
+    <script src="./vue/lib/vue-router.js"></script>
+
+
+</head>
+<body>
+<div id="wrap">
+
+
+
+    <!-- 헤더영역 시작 -->
+
+    <div id="header">
+        <div class="wrap">
+            <div class="gap">
+                <div class="container">
+                    
+                    <!-- logo template  -->
+                    <logo-component v-bind:logo='imgdata'></logo-component>
+
+                    <!-- Navigation template -->
+                    <nav id="nav">
+                        <ul>
+                            <nav-component v-for='item in gnb' v-bind:propsnav='item' router-link to='/item.menu' ></nav-component>
+                        </ul>
+                    </nav>
+                    
+                </div>
+            </div>
+        </div>             
+    </div>    
+                       
+
+    <script>
+
+        var logoComponent = {
+            props:['logo'],
+            template:'\
+                <div class="logo">\
+                    <a href="javascript:" class="logo-btn">\
+                        <img :src="logo" alt="logo">\
+                    </a>\
+                </div>\
+                '
+        }
+
+        var navComponent = {
+            props:['propsnav'],
+            template:'\
+                <li>\
+                    <a href="javascript:"  class="main-btn">{{ propsnav.menu }}</a>\
+                </li>\
+            '
+        }
+
+
+ 
+
+
+
+        var header = new Vue({
+            el:'#header',
+            data:{
+                imgdata:'./img/logo_image.png',
+                gnb:[
+                    {menu:'ABOUT'},
+                    {menu:'PORTFOLIO'},
+                    {menu:'SERVICES'},
+                    {menu:'TESTIMONIAL'},
+                    {menu:'BLOG'},
+                    {menu:'CONTACT'}
+                ]
+            },
+            components:{
+                'logo-component': logoComponent,
+                'nav-component': navComponent
+            }
+
+        });
+
+    </script>
+
+    <!-- 헤더영역 끝 -->
+
+
+
+
+
+
+
+    <!-- 메인영역 시작 -->
+
+    <div id="main">      
+        <section1-component @emit='emitChangeFn' v-bind:propssec1='x'></section1-component>
+        <section2-component></section2-component>
+        <section3-component></section3-component>
+        <section4-component></section4-component>
+        <section5-component></section5-component>
+        <section5-component></section6-component>
+    </div>
+
+
+    <script>
+
+        var section1Component = {
+            props:['propssec1'],
+            template:'\
+                <section id="section1">\
+                    <div class="wrap">\
+                        <div class="gap">\
+                            <div class="container">\
+                                <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                <h2>\
+                                    SALIENT IS DIGITAL<br>\
+                                    BRILLIANCE\
+                                    {{ propssec1 }}\
+                                </h2>\
+                                <h3 data-name="mobile" class="btn">CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                <p data-name="mobile">\
+                                    <span><a href="#" class="btn" @click="emitEvent(\'./popup/modalPopup\'+propssec1+\'.html\')">OUR SERVICES</a></span>\
+                                </p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </section>\
+                ',
+                methods:{
+                    emitEvent:function(z){
+                        this.$emit('emit'); 
+                        window.open(z);  
+                        console.log(z,y); 
+               
+                    }
+                }
+        }
+
+
+        var section2Component = {
+            props:['propssec2'],
+            template:'\
+                <section id="section2">\
+                    <div class="wrap">\
+                        <div class="gap">\
+                            <div class="container">\
+                                <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                <h2>\
+                                    SALIENT IS DIGITAL<br>\
+                                    BRILLIANCE\
+                                </h2>\
+                                <h3 data-name="mobile" class="btn">CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                <p data-name="mobile">\
+                                    <span><a href="#" class="btn">OUR SERVICES</a></span>\
+                                </p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </section>\
+                '
+        }
+
+        var section3Component = {
+            props:['propssec3'],
+            template:'\
+                <section id="section3">\
+                    <div class="wrap">\
+                        <div class="gap">\
+                            <div class="container">\
+                                <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                <h2>\
+                                    SALIENT IS DIGITAL<br>\
+                                    BRILLIANCE\
+                                </h2>\
+                                <h3 data-name="mobile" class="btn">CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                <p data-name="mobile">\
+                                    <span><a href="#" class="btn">OUR SERVICES</a></span>\
+                                </p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </section>\
+                '
+        }
+
+
+        var section4Component = {
+            props:['propssec4'],
+            template:'\
+                <section id="section4">\
+                    <div class="wrap">\
+                        <div class="gap">\
+                            <div class="container">\
+                                <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                <h2>\
+                                    SALIENT IS DIGITAL<br>\
+                                    BRILLIANCE\
+                                </h2>\
+                                <h3 data-name="mobile" class="btn">CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                <p data-name="mobile">\
+                                    <span><a href="#" class="btn">OUR SERVICES</a></span>\
+                                </p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </section>\
+                '
+        }
+
+
+        var section5Component = {
+            props:['propssec5'],
+            template:'\
+                <section id="section5">\
+                    <div class="wrap">\
+                        <div class="gap">\
+                            <div class="container">\
+                                <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                <h2>\
+                                    SALIENT IS DIGITAL<br>\
+                                    BRILLIANCE\
+                                </h2>\
+                                <h3 data-name="mobile" class="btn">CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                <p data-name="mobile">\
+                                    <span><a href="#" class="btn">OUR SERVICES</a></span>\
+                                </p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </section>\
+                '
+        }
+
+
+
+
+        var section6Component = {
+            props:['propssec6'],
+            template:'\
+                <section id="section6">\
+                    <div class="wrap">\
+                        <div class="gap">\
+                            <div class="container">\
+                                <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                <h2>\
+                                    SALIENT IS DIGITAL<br>\
+                                    BRILLIANCE\
+                                </h2>\
+                                <h3 data-name="mobile" class="btn">CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                <p data-name="mobile">\
+                                    <span><a href="#" class="btn">OUR SERVICES</a></span>\
+                                </p>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </section>\
+                '
+        }
+
+
+
+        var main = new Vue({
+            el:'#main',
+            data:{
+                x:100
+            },
+            components:{
+                'section1-component': section1Component,
+                'section2-component': section2Component,
+                'section3-component': section3Component,
+                'section4-component': section4Component,
+                'section5-component': section5Component
+            },
+            methods:{
+                emitChangeFn : function(){
+                    this.x += 100;
+                }
+            },
+            mounted:function(){
+                var $section1 = document.querySelector('#section1');
+                var $section2 = document.querySelector('#section2');
+                var $section3 = document.querySelector('#section3');
+                var $section4 = document.querySelector('#section4');
+                var $section5 = document.querySelector('#section5');
+                // var $serviceBtn = document.querySelector('.service-btn');
+                var winH = window.innerHeight;
+                   
+                    function resizeFn(){
+                        winH = window.innerHeight;                    
+                        $section1.style = 'height:' + winH  + 'px';                        
+                        $section2.style = 'height:' + winH  + 'px';                        
+                        $section3.style = 'height:' + winH  + 'px';                        
+                        $section4.style = 'height:' + winH  + 'px';                        
+                        $section5.style = 'height:' + winH  + 'px';                        
+                    }
+                    resizeFn();
+                    window.addEventListener('resize', resizeFn);
+                    
+                    
+            },
+            router:router
+        });
+
+
+
+        var router = new  VueRouter({
+            props:[
+                {path:'/ABOUT', component: section1Component},
+                {path:'/PORTFOLIO', component: section2Component},
+                {path:'/SERVICES', component: section3Component},
+                {path:'/TESTIMONIAL', component: section4Component},
+                {path:'/BLOG', component: section5Component},
+                {path:'/CONTACT', component: section6Component}
+            ]
+        });
+
+
+
+    </script>
+
+    <!-- 메인영역 끝 -->
+
+
+
+   
+</div>
+</body>
+</html>

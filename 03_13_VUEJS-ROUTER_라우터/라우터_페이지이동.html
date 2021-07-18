@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VueRouter</title>
+
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/style.css">
+
+
+<!-- 오픈소스  -->
+<script src="./js/lib/jquery.min.js"></script>    
+<script src="./vue/lib/vue.js"></script>
+<script src="./vue/lib/vue-router.js"></script>
+
+</head>
+<body>
+<div id="routrWrap">
+
+    <div id="app">
+        <div id="header">
+            <h1 class="logo">Vue Router</h1>
+            <nav class="nav">
+                <ul>
+                    <li class='main-btn-box' v-for='item in route'>
+                        <router-link :to="item.name" v-on:native='eventFn'  class='main-btn' :title='item.title'>{{ item.name }}<i class="icon"></i></router-link>
+                    </li>
+                </ul>                       
+            </nav>
+        </div>
+
+        <div id="content">
+            <router-view v-if='viewPage'></router-view>
+            <home-component v-if='initPage'></home-component> 
+        </div>  
+    </div>
+    
+
+    <script>
+       
+        var homeComponent = {
+            template:"\
+                <div id='home'>\
+                    <div  id='section1' class='section comp'>\
+                        <h2>홈 섹션1 페이지</h2>\
+                    </div>\
+                    <div  id='section2' class='section comp'>\
+                        <h2>홈 섹션2 페이지</h2>\
+                    </div>\
+                    <div  id='section3' class='section comp'>\
+                        <h2>홈 섹션3 페이지</h2>\
+                    </div>\
+                    <div  id='section4' class='section comp'>\
+                        <h2>홈 섹션4 페이지</h2>\
+                    </div>\
+                    <div  id='section5' class='section comp'>\
+                        <h2>홈 섹션5 페이지</h2>\
+                    </div>\
+                </div>\
+            "
+        }
+
+        var main1Component = {
+            template:"\
+                <div  id='main1' class='main comp'>\
+                    <h2>메인1 페이지</h2>\
+                </div>\
+            "
+        }
+
+        var main2Component = {
+            template:"\
+                <div  id='main2' class='main comp'>\
+                    <h2>메인2 페이지</h2>\
+                </div>\
+            "
+        }
+
+        var main3Component = {
+            template:"\
+                <div  id='main3' class='main comp'>\
+                    <h2>메인3 페이지</h2>\
+                </div>\
+            "
+        }
+
+        var main4Component = {
+            template:"\
+                <div  id='main4' class='main comp'>\
+                    <h2>메인4 페이지</h2>\
+                </div>\
+            "
+        }
+
+        var main5Component = {
+            template:"\
+                <div  id='main5' class='main comp'>\
+                    <h2>메인5 페이지</h2>\
+                </div>\
+            "
+        }
+
+
+        // 라우츠 객체 속성 
+        // 페이지 배열 객체 속성값 지정
+        var routes = [
+            {
+                path:'/home',
+                component:homeComponent
+            },
+            {
+                path:'/main1',
+                component:main1Component
+            },
+            {
+                path:'/main2',
+                component:main2Component
+            },
+            {
+                path:'/main3',
+                component:main3Component
+            },
+            {
+                path:'/main4',
+                component:main4Component
+            },
+            {
+                path:'/main5',
+                component:main5Component
+            }
+        ];
+       
+
+        //라우터 객체 생성
+        //콤포넌트 보다 아래에서 생성한다
+        //인스턴스보다 위에 생성한다.
+        var router = new VueRouter({
+            routes
+        });
+
+        //뷰 객체 생성 가장 하단에 생성한다.
+        var app = new Vue({
+            router      : router,
+            data        : {
+                viewPage:false, //로딩시 조건문 실행 
+                initPage:true,  //초기값 컴포넌트 실행
+                route : [
+                    {name:'home',  title:'Home Intro'},
+                    {name:'main1', title:'Main1 Page'},
+                    {name:'main2', title:'Main2 Page'},
+                    {name:'main3', title:'Main3 Page'},
+                    {name:'main4', title:'Main4 Page'},
+                    {name:'main5', title:'Main5 Page'}
+                ]
+            },
+            components:{
+                'home-component' :homeComponent,
+                'main1-component':main1Component,
+                'main2-component':main2Component,
+                'main3-component':main3Component,
+                'main4-component':main4Component,
+                'main5-component':main5Component
+            },
+            mounted:function(){
+                var that = this;
+                var mainBtn = document.querySelectorAll('.main-btn');                   
+                    
+                    mainBtn.forEach(function(el, idx){
+                        mainBtn[idx].addEventListener('click', function(){
+                            that.viewPage = true;
+                            that.initPage = false;
+                        });
+                    });
+
+                    function eventFn(){
+                        alert();
+                    }
+            }
+        }).$mount('#app');
+
+    </script>
+
+</div>
+</body>
+</html>

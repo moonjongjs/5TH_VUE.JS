@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_단방향_바인딩과_v-bind_디렉티브</title>
+    <script src="./vue/lib/vue.js"></script>
+
+    <style>
+        .large_size {font-size:100px;}
+        input {height:40px;text-align:center;font-size:20px;}
+    </style>
+</head>
+<body>
+    
+    <div id="main">
+        <h1> {{ msg }} </h1>
+        <input type="text" v-model:value="msg">
+    </div>
+
+    <script>
+        new Vue({
+            el:'#main',
+            data:{
+                msg:'안녕하세요! Vue.js!!!',
+            }
+        });
+    </script>
+
+</body>
+</html>

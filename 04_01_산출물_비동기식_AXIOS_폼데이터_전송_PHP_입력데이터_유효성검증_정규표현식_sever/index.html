@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기식 axios() 활용 폼데이터 전송 서버사이드 스크립트 PHP(JSP,ASP)</title>
+    <script src="./vue/vue.js"></script>
+    <script src="./vue/axios.min.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+    
+    <div id="app">
+
+         <h1>폼 메일 전송 AXIOS & PHP</h1>   
+
+        <form>
+            <table>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" name="irum" id="irum" v-model='irum'></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="email" name="email" id="email" v-model='email'></td>
+                </tr>
+                <tr>
+                    <td>전화번호</td>
+                    <td><input type="text" name="tel" id="tel" v-model='tel'></td>
+                </tr>
+            </table>
+            <button v-on:click.prevent='formSubmit'>회원가입 폼 전송</button>    
+        </form>
+
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>전화번호</th>
+            </tr>
+            <tr>
+                <td v-for='item in a'>{{item}}</td>
+            </tr>
+            
+        </table>
+
+    </div>
+
+    
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                irum: '',
+                email: '',
+                tel: '',
+                a: [],                    
+                irum_RegExp: /[^a-zA-Z가-힣]/, //정규표현식 변수 설정 : [^영문대소문자한글] 이 아니면 
+                // * 0회이상
+                // ? 0 또는 1자 
+                // + 1회 이상
+                // email_RegExp: /abc@영문.com/
+                // email_RegExp: /^[a-zA-Z0-9]@[a-zA-Z0-9]\.[a-zA-Z]{2,3}$/,
+                // email_RegExp: /abc-123@영문_1234.com/
+                // email_RegExp: /^[a-zA-Z0-9]([-_\.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_\.]?[a-zA-Z0-9])*\.[a-zA-Z]{2,3}$/,
+                // email_RegExp: /abc_123abc@영문_123abc.co.kr/
+                // email_RegExp: /bac.abc-123@영문_숫자abc.go.kr/
+                // email_RegExp: /bac.abc-123@영문.co.uk/
+                email_RegExp: /^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9]+)*.[a-zA-Z]{2,3}$/,
+                email_RegExp_Chk: /[^a-zA-Z0-9\_\-\@\.]/,   //여기는 키보드 입력과 동시에 영문숫자@-_. 이걸 제외한 모든 텍스트 삭제
+                tel_RegExp_Chk: /[^0-9\-]/,
+                tel_RegExp: /^\d{2,3}-\d{3,4}-\d{4}$/
+            },
+            methods:{
+                formSubmit: function(){
+                    
+                   //공백허용안함 유효성 검사
+                   //정규 표현식 유효성 검사
+
+                //    console.log('this.irum '+ this.irum_RegExp.test( this.irum ) ); //false 정상 부정문
+                //    console.log('this.email '+ this.email_RegExp.test( this.email ) ); //true 정상
+                //    console.log('this.tel  '+ this.tel_RegExp.test( this.tel ) );   //true 정상
+
+                    if( this.irum_RegExp.test( this.irum ) === false &&  this.email_RegExp.test( this.email ) === true && this.tel_RegExp.test( this.tel ) === true ){
+                            //폼데이터 생성자 
+                            var fdata = new FormData();
+                            var that = this;
+
+                            fdata.append('irum', this.irum);
+                            fdata.append('email', this.email);
+                            fdata.append('tel', this.tel);
+
+                            axios.post('./response.php', fdata)
+                                .then((res)=>{ //Success
+                                    that.a = res.data.split(';');
+                                    //다음 입력을 위해서 삭제
+                                    that.irum = '';
+                                    that.email = '';
+                                    that.tel = '';
+                                })
+                                .catch((error)=>{ //Fail 
+                                    console.log('AXIOS 에러메시지', error);
+                                });
+                    }
+                    else{
+                        alert('입력데이터 오류입니다. 확인하세요!!');
+                        return false;
+                    }
+
+                } //formSubmit the end
+            },
+            watch:{ //감시자 감독자 Supervisor
+                // data의속성(멤버변수): function(){
+
+                // }
+                irum: function(){ //이름은 한글영문 만 입력 / 공백허용안함  부정문 fals  여기는 true가 나오면 입력 오류
+                    // console.log('이름 상태 감시 내용 출력  ', this.irum );
+                    // 정규표현식멤버변수.test(폼입력내용텍스트) 참 / 거짓 값 추렬
+                    // console.log('irum_RegExp '+ this.irum_RegExp.test(this.irum) );
+                    // 한글과 영문은 결과값 : false
+                    // 한글과 영문은 제외한 모든 값(공백 특수문자 ....) : true 
+                    // 입력박스에 입력값이 잘못되면 즉시 삭제 변경(replace())
+                    // this.irum = this.irum.replace(정규표현식, '');
+                    this.irum = this.irum.replace(this.irum_RegExp, '');
+                },
+                email: function(){ //긍정문 true 여기는 false가 나오면 입력 오류
+                    // console.log( this.email );
+                    // console.log('this.email_RegExp.test( this.email ) '+ this.email_RegExp.test( this.email ) ); 
+                    this.email = this.email.replace(this.email_RegExp_Chk, '');
+                },
+                tel: function(){ //긍정문 true 여기는 false가 나오면 입력 오류
+                    // console.log( this.tel );
+                    // console.log( this.tel_RegExp_Chk.test( this.tel ) );
+                    // console.log( this.tel_RegExp_Chk.test( this.tel ) );
+                    
+                    this.tel = this.tel.replace(this.tel_RegExp_Chk, '');
+                }
+
+            }            
+        });
+    </script>
+  
+
+    <style>
+        * {margin:0;padding:0;vertical-align:middle;border:0;}
+        html,body {width:100%;height:100%;}
+        body {font:normal 14px/1 'arial', '굴림';color:#212121;background:#fff;}
+
+        #wrap {width:100%;height:100%;}
+        #app {width:100%;height:100%;}
+        #app h1 {text-align:center;font-size:30px;padding:50px 0;}
+
+        table {margin:30px auto;border-collapse:collapse;border:2px solid #000;width:600px;background:#f0f0f0;}
+        table th ,
+        table td {padding:15px 30px;text-align:center;border:1px solid #ccc;}
+        table th {background:#f0f0f0;height:50px;padding:0;border-bottom:1px solid #000;}
+        table tr:hover td {background:#f0f0f0;}
+        table caption {padding:20px 0;font-size:30px;font-weight:600;}
+
+        table td input[type='text'] ,
+        table td input[type='email'] { width:100%;height:30px;background:#fff; }
+
+        button {width:200px;height:50px;background:#000;color:#fff;font-size:14px;margin:0 auto;display:block;border-radius:5px;cursor:pointer;transition:all .3s;}
+        button:hover {background:#944;}
+        
+
+    </style>
+
+
+</div>
+</body>
+</html>

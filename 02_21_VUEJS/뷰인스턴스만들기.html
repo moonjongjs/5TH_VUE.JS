@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 뷰 인스턴스 만들기 & 자바스크립트 클래스(객체와 함수)</title>
+    <style>
+
+        table {width:600px;margin:0 auto;}
+        table th,td {border:1px solid #ccc;height:45px;text-align:center;}
+        table#table td:nth-child(2) {text-align:left;}
+
+    </style>
+
+</head>
+<body>
+    
+    <h1>리터럴 방식 클래스 인스턴스 만들기</h1>
+    <h2>주소부</h2>
+    <table id='table'>
+
+    </table>
+
+    <table id='sungjuk'>
+        
+    </table>
+
+    
+
+
+
+
+    <script>
+        /*
+        var app = {};            //리터럴 방식
+        var app = new Object();  //생성자 방식 객체 
+        var app = [];            //리터럴 방식
+        var app = new Array();   //생성자 방식 배열 객체
+        */
+
+
+        //인스턴스(객체) 생성
+        var vue = {
+            cnt: 0,  //프로퍼티(멤버변수)
+            el: '<h1>프로퍼티(멤버변수)탬플릿</h1>',
+            method: ['피자', '닭칼국수', '김밥', '라면', '토마토 스파게티'],
+            main: {
+                student: [
+                    { 번호:1, 이름:'이순신', kor:100, eng:089, mat:064 }, //인덱스 [0]  1행
+                    { 번호:2, 이름:'박순실', kor:098, eng:098, mat:067 }, //인덱스 [1]  2행
+                    { 번호:3, 이름:'최희섭', kor:097, eng:088, mat:088 }, //인덱스 [2]  3행
+                    { 번호:4, 이름:'조지현', kor:099, eng:088, mat:067 }, //인덱스 [3]  4행
+                    { 번호:5, 이름:'홍우현', kor:098, eng:066, mat:067 }  //인덱스 [4]  5행
+                ],
+                address:[
+                    {이름:'이순신',주소:'서울시 서초구 서초동  송림빌딩'},
+                    {이름:'박순실',주소:'서울시 서초구 강남동  송림빌딩'},
+                    {이름:'최희섭',주소:'서울시 강남구 강남동  서산빌딩'},
+                    {이름:'조지현',주소:'서울시 강동구 남동 250번지'},
+                    {이름:'홍우현',주소:'서울시 서초구 서초1동  송림빌딩'}
+                ]
+            },
+            init: function(){  //메서드(멤버함수)
+                //this 인스턴스(객체)
+                this.cnt= 500;
+                this.el += '<h2>프로퍼티(멤버변수)에 템플릿 내용 추가</h2>'; //el = el + '내용'    el += '내용'
+                // this.el = this.el + '<h2>프로퍼티(멤버변수)에 템플릿 내용 추가</h2>'; //el = el + '내용'    el += '내용'
+                console.log( this.cnt );
+                console.log( this.el );
+            },
+            compute: function(){
+                //성적처리
+                
+                
+                var txt2 = '';
+                var $sungjuk = document.querySelector('#sungjuk');
+
+                    txt2+='<tr><th>번호</th><th>이름</th><th>KOR</th><th>ENG</th><th>MAT</th></tr>';
+
+                    // this.main.sungjuk.forEach(function(el, idx, arr){});
+                    this.main.student.forEach(function(el, idx, arr){
+                        txt2+='<tr><td>'+ el.번호 +'</td><td>'+ el.이름 +'</td><td>'+ el.kor +'</td><td>'+ el.eng +'</td><td>'+ el.mat +'</td></tr>';
+                    });
+
+                    $sungjuk.innerHTML =  txt2 ;
+
+
+
+
+
+                var txt = ''; //출력 내용 보관하는 변수
+                var $table = document.querySelector('#table'); //선택자
+
+                    txt =  '<tr><th>이름</th><th>주소</th></tr>'; //제목 1회 출력
+
+                    //반복처리
+                    //자바스크립트 객체 배열처리
+                    this.main.address.forEach(function(el, index, arr){
+                        console.log('배열처리 ', el, index, arr);
+                        txt += '<tr><td>' + el.이름 + '</td><td>' + el.주소 + '</td></tr>'; //5회 반복
+                    }); 
+
+                    /*
+                    txt += '<tr><td>' + this.main.address[0].이름 + '</td><td>' + this.main.address[0].주소 + '</td></tr>'; //5회 반복
+                    txt += '<tr><td>' + this.main.address[1].이름 + '</td><td>' + this.main.address[1].주소 + '</td></tr>'; //5회 반복
+                    txt += '<tr><td>' + this.main.address[2].이름 + '</td><td>' + this.main.address[2].주소 + '</td></tr>'; //5회 반복
+                    txt += '<tr><td>' + this.main.address[3].이름 + '</td><td>' + this.main.address[3].주소 + '</td></tr>'; //5회 반복
+                    txt += '<tr><td>' + this.main.address[4].이름 + '</td><td>' + this.main.address[4].주소 + '</td></tr>'; //5회 반복
+                    */
+
+                    $table.innerHTML = txt;  //테이블에 데이터 출력
+
+                //주소부 탬플릿에 출력
+                //반복문 이용               
+                
+                
+                
+
+
+
+
+
+
+
+
+                //성적표 
+                console.log( this.method );
+                console.log( this.method[0] );
+                console.log( this.method[1] );
+                console.log( this.method[2] );
+                console.log( this.method[3] );
+                console.log( this.method[4] );
+
+                //주소부
+                console.log( this.main.address[3].이름 );
+                console.log( this.main.address[3].주소 );
+
+                console.log( this.main ); //main 프로퍼티(멤버변수) 전체
+                console.log( this.main.student ); //this.main.student   예]인스턴스.프로퍼티.프로퍼티
+                console.log( this.main.student[4] ); // this.main.sudent[4] 예]인스턴스.프로퍼티.프로퍼티[3]
+                console.log( this.main.student[3].이름 ); // this.main.sudent[3].이름 예]인스턴스.프로퍼티.프로퍼티[3].프로퍼티 최종 프로퍼티 값(value)
+                console.log( this.main.student[3].eng ); // this.main.sudent[3].이름 예]인스턴스.프로퍼티.프로퍼티[3].프로퍼티 최종 프로퍼티 값(value)
+                var tot = this.main.student[3].kor + this.main.student[3].eng + this.main.student[3].mat;
+                console.log( '총점 : ' + tot ); //ECMA Script 5  [ES5]
+                console.log(`총점 : ${ tot }`); //ECMA Script 6  [ES6]
+            },
+            run: function(){  //인스턴스 전체 실행 메서드
+                this.init();
+                this.compute();
+            }
+        } //인스턴스(객체) 끝
+
+        // vue.init();     // vue 인스턴스(객체) 안에 init() 이라는 메서드(멤버함수) 실행
+        // vue.compute();  // vue 인스턴스(객체) 안에 compute() 라는 메서드(멤버함수) 실행
+
+        vue.run();
+
+
+
+
+
+        var objProject = {
+            a:100,
+            el:'Vue 프레임워크',
+            data:{
+                arr:[
+                    {이름:'이순신', kor:100, eng:070, mat:069},
+                    {이름:'이순신', kor:100, eng:070, mat:069},
+                    {이름:'이순신', kor:100, eng:070, mat:069},
+                    {이름:'이순신', kor:100, eng:070, mat:069},
+                    {이름:'이순신', kor:100, eng:070, mat:069}
+                ]
+            },
+            method1: function(){
+                this.a = 5000000;
+                console.log(this.a);
+            },
+            method2: function(){
+                this.el += ' 자바스크립트 라이브러리'
+                console.log(this.el);
+            },
+            method3: function(){                
+                console.log(this.data.arr);
+            },
+            init: function(){
+                this.method1();
+                this.method2();
+                this.method3();
+            }
+        };
+        objProject.init();
+
+
+
+        //인스턴스 생성 
+        //프로퍼티: 값
+        //프로퍼티: 배열
+        //메서드 만들어서 프로퍼티 값 변환 또는 출력
+        //인스턴스 전체 실행 메서드 init
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

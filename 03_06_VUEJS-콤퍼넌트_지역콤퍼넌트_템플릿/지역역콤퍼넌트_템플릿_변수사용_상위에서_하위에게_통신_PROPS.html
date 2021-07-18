@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콤퍼넌트_전역콤퍼넌트_템플릿</title>
+    
+    <!-- 오픈소스  -->
+    <script src="./js/lib/jquery.min.js"></script>    
+    <script src="./vue/lib/vue.js"></script>
+
+
+
+</head>
+<body>
+<div id="wrap">
+
+    <div id="app">
+
+        <h1>상위 콤포넌트에서 하위 콤포넌트로의 통신 : PROPS 사용 합니다.</h1>
+    
+        <app-comp v-for='item in 제품' v-bind:propsdata='item'></app-comp>
+
+    </div>
+
+
+
+    <script>
+
+        var appComp = {
+            props:['propsdata'],
+            template:'\
+                <ul>\
+                    <li> 제품코드: {{ propsdata.제품코드 }} 가격 : {{ propsdata.가격 }} 원 </li>\
+                </ul>\
+                '
+        }
+
+
+        var app = new Vue({
+            el:'#app',
+            data:{
+
+                제품:[
+                    {'제품코드':'p01','가격':100},
+                    {'제품코드':'p02','가격':230},
+                    {'제품코드':'p03','가격':350}
+                ]
+
+            },
+            components:{
+                'app-comp': appComp
+            }
+        });
+
+    </script>
+
+
+</div>
+</body>
+</html>

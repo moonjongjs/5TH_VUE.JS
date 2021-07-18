@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AJAX_프로미스_JSON_데이터처리_axios</title>
+
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/style.css">
+
+
+<!-- 오픈소스  -->
+<script src="./js/lib/jquery.min.js"></script>    
+<script src="./vue/lib/vue.js"></script>
+<script src="./vue/lib/axios.min.js"></script>
+
+
+</head>
+<body>
+<div id="wrap">
+
+
+    <div id="app">
+        <h1> 회원관리 </h1>
+        <table class="member">
+            <tr>
+                <th>번호</th>
+                <th>ID</th>
+                <th>PASSWORD</th>
+                <th>EMAIL</th>
+            </tr>    
+            <tr v-for='(row, idx) in arr'>
+                <td>{{ idx+1 }}</td>
+                <td>{{ row.userId }}</td>
+                <td>{{ row.userPw }}</td>
+                <td>{{ row.email }}</td>
+            </tr>    
+        </table>
+
+        <div class="button-wrap">
+            <button v-on:click.prevent='axiosJsonFn'>멤버 출력</button>
+        </div>
+
+    </div>
+
+
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                arr:[]
+            },
+            methods:{
+
+                axiosJsonFn:function(){
+                    var url = './data/member.json';
+
+                        axios.get( url )
+                            .then((response) => {
+                                console.log( response );
+                                this.arr = response.data.member;
+
+                                // console.log(idx, response.data.member[0].userId );
+                                // console.log(idx, response.data.member[0].userPw );
+                                // console.log(idx, response.data.member[0].email );
+
+                                response.data.member.forEach(function(row, idx){
+                                    console.log(idx, row.userId, row.userPw, row.email );
+                                });
+
+                            })
+                            
+
+                }
+            }
+        });
+
+    </script>
+
+</div>
+</body>
+</html>
