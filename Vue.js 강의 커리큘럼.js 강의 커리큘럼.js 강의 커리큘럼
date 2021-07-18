@@ -1,0 +1,178 @@
+Vue.js MOONJONG 강의 커리큘럼
+
+총 7강 39시간의 수업
+
+1강
+
+1교시 : 
+    1-1 프로그램 설치 - Visual Studio Code
+        1-1-0 Chrome Browser(브라우저) - 설치 및 기본 브라우저 설정
+
+        1-1-1 Visual Studio Code - 확장 플러그인 설치 
+            - Open in Browser
+            - Korean Language pack 
+            - Live Server
+            - Vetur(뷰 코드지원)
+            - Material icon(파일 속성별, 폴더별 아이콘 모양)
+            - Night owl(코드 색상)
+
+        1-1-2 Visual Studio Code - 기본 설정  [Ctrl+,]
+            - Zoom : Ctrl + Mouse wheel zoom (줌인, 줌아웃)
+
+        1-1-3 Visual Studio Code - 단축키 사용법
+            - 바로 가기 키(단축키) 보기 [Ctrl+K+S]
+
+        1-1-4 젠코딩(Zen Coding)
+            - div
+            - p
+            - h1
+            - div*3
+            - div>p
+            - div>p*3
+            - ul>li*3
+            - div#wrap>ul>li*3
+            - div.container>ul>li*3
+            - ul>li.slide$*5
+            - ul>li*5.slide$$$
+            - ul>li.slide$$$*5
+            - div+ul>li*3
+            - div>ul>li*3^ul>li*3
+            - div>ul>li*3^^div>ul>li*3
+            - div#wrap>(ul>li*3)+(ul>li*3)
+            - div.slide-container>div.slide-view>ul.slide-wrap>li.slide.slide$*3
+            - div>lorem
+            - ul>li*3>lorem
+
+
+        1-1-5 터미널 사용법
+            - ctrl + `
+
+  
+            
+    1-2 Node.js 설치 
+        - https://nodejs.org/ko/
+
+    1-3 Vue.js 설치 
+        - https://kr.vuejs.org/ - 시작하기 클릭 - 설치 클릭 - 개발버전 클릭 다운받기
+
+    1-4 Vue Devtools 설치 
+        - 크롬브라우저 - 설정 - 테마(크로웹스토어) - Vue Devtools 검색 - Chrome에 추가
+
+    1-5 Git Hub 회원 가입
+        - https://github.com/
+        - Git Repogitory(깃허브 리포지토리) 생성
+
+    1-6 Git Bash(우분투)) 설치
+        - git bash 설치 - https://git-scm.com/
+        - 작업폴더 만들기(생성)
+
+        - 폴더이동하기
+          $ cd github
+
+        - 현재위치 경로확인하기
+          $ pwd /d/github
+
+        - 목록확인
+          $ ls brando/
+
+        - 목록자세히보기
+          $ ls -l       
+
+        - 깃 허브 설정 사용법
+        - git 설정
+          $ git init
+
+        - 목록확인 - 숨김 목록은 안보임 -l
+          $ ls -l
+
+        - 목록확인 - 숨김 목록 보임  -la
+          $ ls -la 
+
+        - 사용자 이메일(email) 정보 환경 설정 입력
+          $ git config --global user.email 'moonseonjong@naver.com'
+          or
+          $ git config user.email 'moonseonjong@naver.com'
+
+        - 사용자 이메일(email) 확인
+          $ git config user.email
+          moonseonjong@naver.com
+
+        - 사용자 이름(name) 정보 환경 설정 입력
+          $ git config --global user.name 'moonjongjs'
+          or
+          $ git config user.name 'moonjongjs'
+
+        - 사용자 이름(name) 확인
+          $ git config user.name
+          moonjongjs
+
+          $ git remote add origin 리포지토리복사된url 오른쪽마우스 past (붙이기)
+          $ git remote add origin https://github.com/moonjongjs/brando.git
+
+          //우분투(리눅스)에서 원격으로 리포지토리에 접속 확인하기
+          $ git remote -v
+          origin  https://github.com/moonjongjs/brando.git (fetch) 
+          origin  https://github.com/moonjongjs/brando.git (push)
+
+        - add - 스테이징에 올리기
+          $ git add .
+
+        - commit - 스테이징과 리포지토리 변경사항 상태
+          $ git commit -m 'brando homepage upload'
+
+        - phsh - 스테이징에 변경된 파일들을 리포지토리에 업로드
+          $ git push origin master
+
+
+2교시 :  - Node.js, Vue.js, Chrome Browser, Git Hub 회원 가입, Git Bash(우분투)) 설치, Git Repogitory(깃허브 리포지토리)
+3교시
+4교시
+5교시
+6교시
+
+
+2강
+1교시
+2교시
+3교시
+4교시
+5교시
+6교시
+
+3강
+1교시
+2교시
+3교시
+4교시
+5교시
+6교시
+
+4강
+1교시
+2교시
+3교시
+4교시
+5교시
+6교시
+
+5강
+1교시
+2교시
+3교시
+4교시
+5교시
+6교시
+
+6강
+1교시
+2교시
+3교시
+4교시
+5교시
+6교시
+
+7강
+1교시
+2교시
+3교시
+
